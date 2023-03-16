@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     default:
 
-                        btn.setImageResource(R.drawable.king);
+                        btn.setImageResource(R.drawable.king2);
                         break;
 
 
