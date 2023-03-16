@@ -7,6 +7,8 @@ public class Game {
     public static final int COUNT_CELLS_X = 4;
     public static final int COUNT_CELLS_Y = 4;
     public int[][] theField, sells;
+    public int score;
+    public boolean evoli;
     public ArrayList<Integer> dowm = new ArrayList<>();
     public ArrayList<Integer> foran = new ArrayList<>();
     public int x = (int) (Math.random() * 2);
@@ -39,6 +41,7 @@ public class Game {
     }
 
     public void evol(int i, int j) {
+        evoli=false;
         foran.removeAll(foran);
         dowm.removeAll(dowm);
         ArrayList<Integer> ij = new ArrayList<>();
@@ -84,7 +87,7 @@ public class Game {
                     ij.add(ak);
                     ij.add(j);
                     theField[ak][j] = -1;
-
+                    evoli=true;
                     switch (a) {
                         case 0:
                         case 1:
@@ -132,8 +135,9 @@ public class Game {
                     }
 
                 }
-                if (theField[i][jk] == a) {
 
+                if (theField[i][jk] == a) {
+                    evoli=true;
                     ij.add(i);
                     ij.add(jk);
                     theField[i][jk] = -1;

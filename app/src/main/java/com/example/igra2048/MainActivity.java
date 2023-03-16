@@ -15,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     public Game game;
+    int kK=0;
+    int score=0;
     public SharedPreferences prefs;
     public int koli=3;
     public ImageView random ;
-    public TextView rnd1;
+    public TextView rnd1,kt;
     public int[] buttons = new int[] {R.id.b1, R.id.b2, R.id.b3,R.id.b4,R.id.b5,R.id.b6,R.id.b7,R.id.b8,R.id.b9,R.id.b10,R.id.b11,R.id.b12,R.id.b13,R.id.b14,R.id.b15,R.id.b16 };
     public int[] tv = new int[] {R.id.tv1, R.id.tv2, R.id.tv3,R.id.tv4,R.id.tv5,R.id.tv6,R.id.tv7,R.id.tv8,R.id.tv9,R.id.tv10,R.id.tv11,R.id.tv12,R.id.tv13,R.id.tv14,R.id.tv15,R.id.tv16 };
     public void onClick(View v) {
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
                     newob();
                     down();
                     check();
+                    if(game.evoli==true) {
+                        check1();
+                    }
                 }
 
                 }
@@ -69,11 +74,23 @@ public class MainActivity extends AppCompatActivity {
             btn.startAnimation(animation);
         }
     }
+    public void check1() {
+
+        for(int i = 0; i<4; i++) {
+            for (int j = 0; j < 4; j++) {
+                score += game.sells[i][j];
+            }
+        }
+        kt.setText(Integer.toString(score));
+    }
+
     public void check() {
+
 
 
         for(int i = 0; i<4; i++){
             for(int j=0;j<4;j++){
+
                 ImageButton btn=(ImageButton) findViewById(buttons[i*4+j]);
                 TextView tve=findViewById(tv[i*4+j]);
                 int x=1;
@@ -125,14 +142,14 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     default:
-
-                        btn.setImageResource(R.drawable.king2);
+                        btn.setImageResource(R.drawable.king);
                         break;
 
 
             }
             }
         }
+
     }
     public void onNot(View v){
 
@@ -145,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         random = findViewById(R.id.random);
         game= new Game();
+        kt=findViewById(R.id.textView2);
+        kt.setText(Integer.toString(kK));
         prefs = this.getSharedPreferences(
                 "com.example.igra2048", Context.MODE_PRIVATE);
         animation= AnimationUtils.loadAnimation(this, R.anim.newob);
